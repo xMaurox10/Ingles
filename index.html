@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Canvas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-theme="light">
+
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <h1>Bienvenido/a de nuevo</h1>
+            <p>Inicia sesión para continuar tu aventura.</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="email" id="login-email" placeholder="Tu correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder="Tu contraseña" required>
+                </div>
+                <button type="submit">Entrar</button>
+                <div id="login-error" class="auth-error"></div>
+            </form>
+            <p class="auth-switch">¿No tienes cuenta? <a href="#" id="show-register-link">Regístrate</a></p>
+        </div>
+    </div>
+
+    <div id="register-screen" class="screen">
+        <div class="login-container">
+            <h1>Crea tu cuenta</h1>
+            <p>Únete a la comunidad y empieza a aprender.</p>
+            <form id="register-form">
+                <div class="input-group">
+                    <input type="text" id="register-username" placeholder="Elige un nombre de usuario" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="register-email" placeholder="Tu correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="register-password" placeholder="Crea una contraseña segura" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="register-password-confirm" placeholder="Confirma tu contraseña" required>
+                </div>
+                <button type="submit">Crear Cuenta</button>
+                <div id="register-error" class="auth-error"></div>
+            </form>
+            <p class="auth-switch">¿Ya tienes una cuenta? <a href="#" id="show-login-link">Inicia Sesión</a></p>
+        </div>
+    </div>
+
+
+    <div id="language-selection-screen" class="screen">
+        <div class="language-selection-container">
+            <h1>Elige tu idioma</h1>
+            <p>Selecciona el idioma que quieres practicar hoy.</p>
+            <div class="language-options">
+                <div class="language-option" data-lang="Inglés">
+                    <div class="flag flag-gb"></div>
+                    <div class="language-name">Inglés</div>
+                </div>
+                <div class="language-option" data-lang="Checo">
+                    <div class="flag flag-cz"></div>
+                    <div class="language-name">Checo</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <main id="app-screen" class="screen">
+        <header class="app-header">
+            <div class="welcome-message" id="welcome-message"></div>
+            <div class="header-actions">
+                <div class="header-stat" id="gem-counter">
+                    <span class="icon">💎</span>
+                    <span class="value">0</span>
+                </div>
+                <div class="header-stat" id="life-counter">
+                    <span class="icon">❤️</span>
+                    <span class="value">0</span>
+                </div>
+                <div class="store-icon" id="store-icon">🛍️</div>
+                <div class="daily-reward-icon" id="daily-reward-icon">🎁<span class="notification-dot" id="reward-notification-dot" style="display: none;"></span></div>
+                <div class="trophy-icon" id="trophy-icon">🏆</div>
+                <div class="profile-icon" id="profile-icon-container"></div>
+                <button class="logout-button" id="logout-button">Salir</button>
+            </div>
+            <div class="header-progress-bar-container">
+                <div class="header-progress-bar" id="header-progress-bar"></div>
+            </div>
+        </header>
+
+        <div id="dashboard-view" class="view active">
+            <div class="dashboard-header">
+                <h1 id="dashboard-greeting"></h1>
+                <p id="dashboard-motivation">¡Es un gran día para aprender algo nuevo!</p>
+            </div>
+
+            <div class="dashboard-main-card">
+                 <div class="main-card-progress">
+                    <h5>Tu Progreso</h5>
+                    <div class="xp-progress-section">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="dashboard-progress-bar" style="width: 0%;"></div>
+                        </div>
+                        <p class="xp-text" id="dashboard-xp-text"></p>
+                    </div>
+                </div>
+                <div class="main-card-cta">
+                    <p>¡Sigue adelante con tu racha de <strong id="dashboard-streak">🔥 0</strong> días!</p>
+                    <button id="start-learning-btn">Comenzar Lección</button>
+                    <button id="change-language-btn" class="button-secondary">Cambiar Idioma</button>
+                </div>
+            </div>
+
+            <div class="dashboard-widgets">
+                <div class="widget">
+                    <span class="widget-icon">🎯</span>
+                    <h4 id="dashboard-level">Nivel 0</h4>
+                    <p>Tu Nivel Actual</p>
+                </div>
+                <div class="widget" id="league-widget">
+                     <span class="widget-icon" id="dashboard-league-icon">🥉</span>
+                    <h4 id="dashboard-league-name">Bronce</h4>
+                    <p>Tu Liga</p>
+                </div>
+                <div class="widget">
+                     <span class="widget-icon">📚</span>
+                    <h4 id="dashboard-modules">0/9</h4>
+                    <p>Módulos Completados</p>
+                </div>
+                <div class="widget">
+                    <div class="widget-icon-flag" id="dashboard-language-flag"></div>
+                    <h4 id="dashboard-language"></h4>
+                    <p>Idioma Actual</p>
+                </div>
+                <div class="widget">
+                    <span class="widget-icon">✍️</span>
+                    <h4 id="dashboard-words">0</h4>
+                    <p>Palabras Aprendidas</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="lessons-view" class="view">
+            <div class="lessons-header">
+                <button id="back-to-dashboard-btn" class="back-button">&lt; Volver al Dashboard</button>
+                <h2>Elige un módulo para empezar</h2>
+            </div>
+            <section class="vocabulary-grid" id="vocabulary-grid"></section>
+        </div>
+    </main>
+
+    <div id="profile-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button" id="close-profile-modal-button">&times;</span>
+            <div class="profile-details" id="modal-profile-content"></div>
+        </div>
+    </div>
+
+    <div id="leaderboard-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button" id="close-leaderboard-modal-button">&times;</span>
+            <div class="leaderboard-container" id="leaderboard-container"></div>
+        </div>
+    </div>
+
+    <div id="store-modal" class="modal-overlay">
+        <div class="modal-content wide">
+            <span class="close-button" id="close-store-modal-button">&times;</span>
+            <div id="store-content"></div>
+        </div>
+    </div>
+
+    <div id="daily-rewards-modal" class="modal-overlay">
+        <div class="modal-content wide">
+            <span class="close-button" id="close-daily-rewards-modal-button">&times;</span>
+            <div id="daily-rewards-content"></div>
+        </div>
+    </div>
+
+
+    <div id="lesson-type-modal" class="modal-overlay">
+        <div class="modal-content wide">
+            <span class="close-button" id="close-lesson-type-modal-button">&times;</span>
+            <div class="lesson-type-content">
+                <h2>Elige tu lección</h2>
+                <p>¿Qué te apetece practicar hoy?</p>
+                <div class="lesson-type-options">
+                    <div class="lesson-type-option" id="start-vocab-btn">
+                        <span class="lesson-icon">📖</span>
+                        <h4>Vocabulario</h4>
+                        <p>Aprende nuevas palabras y frases.</p>
+                    </div>
+                    <div class="lesson-type-option disabled">
+                        <span class="lesson-icon">🎧</span>
+                        <h4>Escuchar</h4>
+                        <p>Mejora tu comprensión auditiva.</p>
+                        <span class="soon-badge">Próximamente</span>
+                    </div>
+                    <div class="lesson-type-option disabled">
+                        <span class="lesson-icon">💬</span>
+                        <h4>Hablar</h4>
+                        <p>Practica tu pronunciación.</p>
+                        <span class="soon-badge">Próximamente</span>
+                    </div>
+                    <div class="lesson-type-option disabled">
+                        <span class="lesson-icon">🧠</span>
+                        <h4>Repaso</h4>
+                        <p>Refuerza lo que ya has aprendido.</p>
+                        <span class="soon-badge">Próximamente</span>
+                    </div>
+                     <div class="lesson-type-option disabled">
+                        <span class="lesson-icon">📚</span>
+                        <h4>Verbos</h4>
+                        <p>Domina las conjugaciones.</p>
+                         <span class="soon-badge">Próximamente</span>
+                    </div>
+                     <div class="lesson-type-option disabled">
+                        <span class="lesson-icon">💡</span>
+                        <h4>Conceptos</h4>
+                        <p>Entiende la gramática clave.</p>
+                        <span class="soon-badge">Próximamente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="lesson-modal" class="modal-overlay">
+        <div class="modal-content wide">
+            <span class="close-button" id="close-lesson-modal-button">&times;</span>
+            <div id="lesson-content">
+                </div>
+        </div>
+    </div>
+
+    <script src="js/constants.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
